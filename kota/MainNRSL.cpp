@@ -10,7 +10,18 @@
 #include <conio.h>
 #define NAMA 50
 
-void Menu();
+
+void Menu(){
+	printf("\n\nPilih Menu Di bawah ini :\n");
+	printf("1. Insert Kota\n");
+	printf("2. Insert Warga Baru\n");
+	printf("3. Delete Kota\n");
+	printf("4. Delete Warga\n");
+	printf("5. Menampilkan Seluruh Informasi Kota\n");
+	printf("6. Keluar Program");
+
+	printf("\n\nPilihan : ");
+}
 
 int main(){
 	/* Kamus Lokal */
@@ -18,7 +29,7 @@ int main(){
 		
 		int i;
 		int pilihMenu;
-		int pilihanList;
+		int pilihanKota;
 		infotype X;
 
 	/* Program */
@@ -31,6 +42,8 @@ int main(){
 	do{
 		system("cls");
 		printf("=======================\n");
+		printf("     Program Kota Array\n");
+		printf("=======================\n");
 		i = 0;
 		for(i;i<5;i++){
 			if(First(Kota[i]) != Nil){
@@ -40,21 +53,20 @@ int main(){
 				printf("%d. Kota Tidak Ada\n",i+1);
 			}
 		}
-		printf("\n=======================\n");
 		Menu();
 		scanf("%d",&pilihMenu);
 
 		switch(pilihMenu){
-			case 1 : 
+			case 1 : //insert Kota
 				printf("Pilih Nomor Kota : ");
-				scanf("%d",&pilihanList);
+				scanf("%d",&pilihanKota);
 				X = (infotype) malloc (NAMA);
 				printf("Masukan Nama Kota : ");
 				scanf("%s",X);
 				
-				if(pilihanList >= 1 && pilihanList <= 5){	
-					if(First(Kota[pilihanList-1]) == Nil){
-						InsVFirst(&Kota[pilihanList-1],X);		
+				if(pilihanKota >= 1 && pilihanKota <= 5){	
+					if(First(Kota[pilihanKota-1]) == Nil){
+						InsertKota(&Kota[pilihanKota-1],X);		
 					}
 					else{		
 						printf("Sudah Terdapat Kota Pada Nomor Tersebut !");		
@@ -69,14 +81,14 @@ int main(){
 				
 			case 2 :
 				printf("Pilih Nomor Kota : ");
-				scanf("%d",&pilihanList);
+				scanf("%d",&pilihanKota);
 				X = (infotype) malloc (NAMA);
 				printf("Masukan Nama Warga : ");
 				scanf("%s",X);
 				
-				if(pilihanList >= 1 && pilihanList <= 5){	
-					if(First(Kota[pilihanList-1]) != Nil){
-						InsVLast(&Kota[pilihanList-1],X);		
+				if(pilihanKota >= 1 && pilihanKota <= 5){	
+					if(First(Kota[pilihanKota-1]) != Nil){
+						InsertWarga(&Kota[pilihanKota-1],X);		
 					}
 					else{		
 						printf("Kota Tidak Ada !");		
@@ -90,12 +102,12 @@ int main(){
 				
 			case 3 :
 				printf("Pilih Nomor Kota Yang Akan Di Hapus : ");
-				scanf("%d",&pilihanList);
+				scanf("%d",&pilihanKota);
 				
-				if(pilihanList >= 1 && pilihanList <= 5){
-					if(First(Kota[pilihanList-1]) != Nil){
-						printf("Kota %s Berhasil Dihapus !",Info(First(Kota[pilihanList-1])));
-						DelAll (&Kota[pilihanList-1]);
+				if(pilihanKota >= 1 && pilihanKota <= 5){
+					if(First(Kota[pilihanKota-1]) != Nil){
+						printf("Kota %s Berhasil Dihapus !",Info(First(Kota[pilihanKota-1])));
+						DelAll (&Kota[pilihanKota-1]);
 					}
 					else{
 						printf("Kota Tidak Ada, Tidak Perlu Dihapus !");
@@ -107,14 +119,14 @@ int main(){
 				
 			case 4 :
 				printf("Pilih Nomor Kota Dari Warga Yang Akan Di Hapus : ");
-				scanf("%d",&pilihanList);
+				scanf("%d",&pilihanKota);
 				
 				X = (infotype) malloc (NAMA);
 				printf("Masukan Nama Warga Yang Akan Dihapus : ");
 				scanf("%s",X);
 				
-				if(pilihanList >= 1 && pilihanList <= 5){
-					DelP (&Kota[pilihanList-1], X);
+				if(pilihanKota >= 1 && pilihanKota <= 5){
+					DelP (&Kota[pilihanKota-1], X);
 				}
 				else{
 						printf("Kota Tidak Ada, Tidak Perlu Dihapus !");
@@ -126,10 +138,8 @@ int main(){
 			case 5 : 
 				i = 0;
 				for(i;i<5;i++){
-					printf("==============\n");
 					printf("%d. ",i+1);
 					PrintInfo(Kota[i]);
-					printf("==============\n\n");
 				}
 				getch();
 				break;
@@ -144,15 +154,4 @@ int main(){
 }
 
 
-void Menu(){
-	printf("Pilih Menu Di bawah ini :\n\n");
-	printf("1. Tambah Kota\n");
-	printf("2. Tambah Warga Baru\n");
-	printf("3. Hapus Kota\n");
-	printf("4. Hapus Warga\n");
-	printf("5. Tampilkan Seluruh Informasi Kota\n");
-	printf("6. Keluar Program");
-
-	printf("\n\nPilihan : ");
-}
 
